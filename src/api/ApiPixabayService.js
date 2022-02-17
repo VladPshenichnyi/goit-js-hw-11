@@ -16,7 +16,7 @@ export default class FetchApiPictures {
     fetchPicture() {
         const url = `${ BASE_URL }${API_KEY}&q=${this.picture}&${this.seekOptions}`;
         // console.log(`Мы ищем ==> ${}`);
-        return fetch(url).then((response) => {
+        return fetch(url).then(response => {
             if (!response.ok) {
             throw new Error(response.status);
             }
