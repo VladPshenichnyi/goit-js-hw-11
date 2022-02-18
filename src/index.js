@@ -10,43 +10,21 @@ let picturesSetFind = '';
 
 const refs = {
     inputForm: document.querySelector('input'),
-    submitFormBtn: document.querySelector('form'),
-    picturesList: document.querySelector('.gallery')
+    submitFormBtn: document.querySelector('.search-form'),
+    picturesList: document.querySelector('.gallery'),
+    loadMoreBtn: document.querySelector('.load-more')
 }
+
+const fetchApiPictures = new FetchApiPictures();
 
 refs.inputForm.focus()
-refs.inputForm.addEventListener('input', searchPictures);
-refs.submitFormBtn.addEventListener('submit', onSubmitBtn)
+refs.submitFormBtn.addEventListener('submit', onSearchPictures)
+// refs.loadMoreBtn.addEventListener('click', onLoadMore)
 
-// const fetchApiPictures = new FetchApiPictures();
-
-function searchPictures() {    
-    picturesSetFind = refs.inputForm.value.trim();    
-}
-
-function onSubmitBtn(e) {
+function onSearchPictures(e) {
     e.preventDefault()
-    const API_KEY = '/?key=25756653-ca7b891a55f16e964dd1f6216';
-    const BASE_URL = 'https://pixabay.com/api';
-    const url = `${BASE_URL}${API_KEY}&q=${picturesSetFind}`
-    if (picturesSetFind === '') {
-        return Notiflix.Notify.failure('Введите что нибудь');
-    }
-    else 
-    {
-        fetch(url).then((response) => {
-        if (!response.ok) {
-        throw new Error(response.status);
-        }
-        return response.json();
-        }).then(data => {
-            if (data.total === 0) {
-                Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
-            }
-            else {
-                Notiflix.Notify.success(`Мы нашли ${data.total} изображений по запросу ${picturesSetFind}`)
-                console.log(data)
-            }
-        })
-    }   
+
+    fetchApiPictures.query = e.currentTarget.elements.searchQuery.value;
+    fetchApiPictures.resetPage();
+    fetchApiPictures.fetchPicture()
 }

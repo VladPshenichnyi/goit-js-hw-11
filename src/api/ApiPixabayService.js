@@ -1,38 +1,61 @@
-const API_KEY = '/?key=25756653-ca7b891a55f16e964dd1f6216';
-const BASE_URL = 'https://pixabay.com/api';
-// fetch(`${ API_URL }${API_KEY}}&q=${onSearch}`).getJSON(URL, function(data){
-// if (parseInt(data.totalHits) > 0)
-//     $.each(data.hits, function(i, hit){ console.log(hit.pageURL); });
-// else
-//     console.log('No hits');
-// });
-
 export default class FetchApiPictures { 
     constructor() { 
-        this.picture = '';
-        this.seekOptions = 'image_type=photo,orientation=horizontal,safesearch=false';
+        this.searchPicture = '';
+        this.page = 1
+        this.seekOptions = `image_type=photo,orientation=horizontal&safesearch=true&page=${this.page}&per_page=16`;
     };
 
     fetchPicture() {
-        const url = `${ BASE_URL }${API_KEY}&q=${this.picture}&${this.seekOptions}`;
-        // console.log(`Мы ищем ==> ${}`);
-        return fetch(url).then(response => {
+        const BASE_URL = 'https://pixabay.com/api';
+        const API_KEY = '/?key=25756653-ca7b891a55f16e964dd1f6216';
+        const url = `${BASE_URL}${API_KEY}&q=${this.searchPicture}&${this.seekOptions}`
+        fetch(url).then((response) => {
             if (!response.ok) {
             throw new Error(response.status);
             }
             return response.json();
+        }).then(data => {
+            this.incrementPage()
+            console.log(data);
+            return console.log(data.hits);             
         })
-            .then(picture => { 
-            console.log(picture)
-            return picture;                   
-            })
+        // if (this.picture === '') {
+        //     console.log('Пусто');
+        //     // return Notiflix.Notify.failure('Введите что нибудь');
+        // }
+        // else {
+        //     fetch(url).then((response) => {
+        //     if (!response.ok) {
+        //     throw new Error(response.status);
+        //     }
+        //     return response.json();
+        //     }).then(data => {
+        //         if (data.total === 0) {
+        //         console.log("Sorry, there are no images matching your search query. Please try again.");
+        //         // Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+        //     }
+        //     else {
+        //         // Notiflix.Notify.success(`Мы нашли ${data.total} изображений по запросу ${picturesSetFind}`)
+        //         console.log(data) 
+        //         console.log(`Мы нашли ${data.total} изображений по запросу ${this.searchPicture}`) 
+        //     }
+        //     })
+        // }
     }
 
-    get country() { 
-        return this.picture;
+    incrementPage() {
+        this.page += 1;
     }
 
-    set country(newPicture) {
-        this.picture = newPicture;
+    resetPage() {
+        this.page = 1;
+    }
+
+    get query() { 
+        return this.searchPicture;
+    }
+
+    set query(newQuery) {
+        this.searchPicture = newQuery;
     }
 }
