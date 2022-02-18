@@ -23,7 +23,7 @@ export default class FetchApiPictures {
             return response.json();
         })
             .then(picture => { 
-            // console.log(picture)
+            console.log(picture)
             return picture;                   
             })
     }
