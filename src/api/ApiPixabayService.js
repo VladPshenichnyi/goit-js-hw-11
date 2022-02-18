@@ -1,6 +1,6 @@
 const BASE_URL = 'https://pixabay.com/api';
 const API_KEY = '/?key=25756653-ca7b891a55f16e964dd1f6216';
-const OPTIONS_SEARCH = 'image_type=photo,orientation=horizontal&safesearch=true&per_page=16'
+const OPTIONS_SEARCH = 'image_type=photo,orientation=horizontal&safesearch=false&per_page=16'
 
 export default class FetchApiPictures { 
     constructor() { 
@@ -8,20 +8,17 @@ export default class FetchApiPictures {
         this.page = 1
     };
 
-    fetchPicture() {
-        
+    fetchPicture() {        
         const url = `${BASE_URL}${API_KEY}&q=${this.searchPicture}&${OPTIONS_SEARCH}&page=${this.page}`
-        fetch(url).then(response => {
-            // if (!response.ok) {
-            //     throw new Error(response.status);
-            // }
+        return fetch(url).then(response => {
+            if (!response.ok) {
+                throw new Error(response.status);
+            }
             return response.json();
-        }).then(({hits , total}) => {
+        }).then(data => {
             this.incrementPage()
-            console.log(hits);  
-            console.log(total);  
-            return {hits , total};               
-        })        
+            return data;               
+        })   
     }
 
     incrementPage() {
