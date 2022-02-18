@@ -37,5 +37,9 @@ function onSubmitBtn(e) {
         throw new Error(response.status);
         }
         return response.json();
-    }).then(data => console.log(data))
+    }).then(data => {
+        Notiflix.Notify.success(`Мы нашли ${data.total} изображений по запросу ${picturesSetFind}`)
+        console.log(data)
+    })
+    
 }
