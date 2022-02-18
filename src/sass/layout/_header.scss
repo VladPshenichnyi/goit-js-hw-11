@@ -1,8 +1,13 @@
 .header {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: rgba(104, 71, 223, 0.575);
+  margin-bottom: 92px;
 }
+
 .search-form {
   position: relative;
   display: flex;

@@ -1,6 +1,6 @@
 const BASE_URL = 'https://pixabay.com/api';
 const API_KEY = '/?key=25756653-ca7b891a55f16e964dd1f6216';
-const OPTIONS_SEARCH = 'image_type=photo,orientation=horizontal&safesearch=false&per_page=16'
+const OPTIONS_SEARCH = 'image_type=photo&orientation=horizontal&safesearch=false&per_page=40'
 
 export default class FetchApiPictures { 
     constructor() { 

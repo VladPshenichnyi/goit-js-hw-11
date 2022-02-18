@@ -15,6 +15,11 @@ const refs = {
 
 const fetchApiPictures = new FetchApiPictures();
 
+const lightbox = new SimpleLightbox('.gallery a', {
+    // captionsData: 'alt',
+    captionDelay: 300,
+});
+
 refs.inputForm.focus()
 refs.searchForm.addEventListener('submit', onSearchPictures)
 refs.loadMoreBtn.addEventListener('click', onLoadMore)
@@ -42,7 +47,7 @@ function onSearchPictures(e) {
 }
 
 function onLoadMore() { 
-    fetchApiPictures.fetchPicture().then(data => { 
+    fetchApiPictures.fetchPicture().then(data => {        
         createGallery(data.hits)
     })
 
