@@ -1,0 +1,11 @@
+.load-more {
+  display: none;
+}
+.load-more.active {
+  display: block;
+  margin: 30px auto;
+  width: 300px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+}
