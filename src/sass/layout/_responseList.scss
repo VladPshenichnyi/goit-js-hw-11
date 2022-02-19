@@ -22,8 +22,6 @@
       width: 280px;
       height: 185px;
       display: flex;
-      align-items: center;
-      // background-size: auto;
       transition: transform var(--animation-duration) var(--timing-function);
       &:hover {
         transform: scale(1.03);
@@ -36,7 +34,8 @@
 }
 .gallery-card__preview {
   background-position: center;
-  background-size: auto;
+  background-size: cover;
+  object-fit: cover;
 }
 .gallery-card__info {
   padding: 10px;
