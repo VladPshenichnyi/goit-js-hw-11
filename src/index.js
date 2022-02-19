@@ -26,6 +26,7 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore)
 
 function onSearchPictures(e) {
     e.preventDefault()
+
     window.scrollTo({
     top: 0,
     behavior: "smooth"
@@ -36,15 +37,16 @@ function onSearchPictures(e) {
     
     if (searchPicture === '') {
         return Notiflix.Notify.failure('Введите что нибудь');
-    }
+    } 
 
     fetchApiPictures.resetPage();
     fetchApiPictures.fetchPicture().then(data => {
         if (data.total === 0) { 
             Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
-        } else {
-            Notiflix.Notify.success(`Мы нашли ${data.total} изображений по запросу ${searchPicture}`);
+        }  else {
+            Notiflix.Notify.success(`Мы нашли ${data.total} изображений по запросу "${searchPicture}"`);
         }
+        
         fetchApiPictures.totalPicture(data.total, data.hits.length)
         fetchApiPictures.stillHave()
         loadMoreShowBtn()
@@ -60,7 +62,7 @@ function onLoadMore() {
         lightbox.refresh();
         if (data.hits.length < 40) {
             refs.loadMoreBtn.classList.remove('active')         
-            return Notiflix.Notify.success(`Эти были последние =(`)
+            return Notiflix.Notify.success(`Эти были последние 😒`)
         } 
         refs.loadMoreBtn.textContent = `Показать еще ${fetchApiPictures.inPage} из ${fetchApiPictures.totalPictures}`
     })

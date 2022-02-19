@@ -1,11 +1,17 @@
 .load-more {
   display: none;
+  font-weight: 600;
 }
 .load-more.active {
+  background-color: rgba(104, 71, 223, 0.884);
   display: block;
   margin: 30px auto;
   width: 300px;
   height: 30px;
   border-radius: 10px;
   border: none;
+  &:hover {
+    background-color: rgba(104, 71, 223, 0.658);
+    box-shadow: 5px 5px 5px rgba(86, 41, 248, 0.76);
+  }
 }
