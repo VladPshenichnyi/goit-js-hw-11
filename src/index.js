@@ -16,9 +16,17 @@ const refs = {
 const fetchApiPictures = new FetchApiPictures();
 
 const lightbox = new SimpleLightbox('.gallery a', {
-    // captionsData: 'alt',
+    captionsData: 'alt',
     captionDelay: 300,
 });
+
+// window.scrollBy({
+//     top: cardHeight * 2,
+//     behavior: 'smooth',
+//     });
+// const { height: cardHeight } = document
+//     .querySelector('.gallery')
+//     .firstElementChild.getBoundingClientRect();
 
 refs.inputForm.focus()
 refs.searchForm.addEventListener('submit', onSearchPictures)
