@@ -9,8 +9,7 @@ export default class FetchApiPictures {
         this.searchPicture = '';
         this.page = 1;
         this.totalPictures = 0;
-        this.stillHavePicture = 0;
-        this.parePage = 0;
+        this.inPage = 0;
     };
 
     async fetchPicture() {        
@@ -23,10 +22,6 @@ export default class FetchApiPictures {
         }).then(data => {
             this.incrementPage()
             this.stillHave()
-            // this.totalPicture(data.total)
-            // this.stillHave()
-            // console.log(this.stillHavePicture);
-            // console.log(this.stillHavePicture - this.parePage)
             return data;               
         })   
     }
@@ -39,18 +34,16 @@ export default class FetchApiPictures {
         this.page = 1;
     }
 
-    totalPicture(data, page) { 
-        this.totalPictures = data;
-        this.parePage = page
-        // console.log(this.totalPictures)
-        // console.log(this.parePage)
+    totalPicture(picturesCount, pageCount) { 
+        this.totalPictures = picturesCount;
+        this.inPage = pageCount
     }
 
     stillHave() {
         if (this.totalPictures >= 40) {
-            this.totalPictures -= this.parePage
+            this.totalPictures -= this.inPage
         } if (this.totalPictures < 40 )  { 
-            this.parePage = this.totalPictures
+            this.inPage = this.totalPictures
         }    
     }
 

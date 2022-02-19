@@ -13,15 +13,6 @@ const refs = {
     loadMoreBtn: document.querySelector('.load-more')
 }
 
-const { height: cardHeight } = document
-    .querySelector('.gallery')
-    // .firstElementChild.getBoundingClientRect();
-
-    window.scrollBy({
-    top: cardHeight * 2,
-    behavior: 'smooth',
-    });
-
 const fetchApiPictures = new FetchApiPictures();
 
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -35,7 +26,10 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore)
 
 function onSearchPictures(e) {
     e.preventDefault()
-    window.scrollTo(0,0)
+    window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+    });
 
     fetchApiPictures.query = e.currentTarget.elements.searchQuery.value.trim();
     const searchPicture = fetchApiPictures.query
@@ -68,7 +62,7 @@ function onLoadMore() {
             refs.loadMoreBtn.classList.remove('active')         
             return Notiflix.Notify.success(`Эти были последние =(`)
         } 
-        refs.loadMoreBtn.textContent = `Показать еще ${fetchApiPictures.parePage} из ${fetchApiPictures.totalPictures}`
+        refs.loadMoreBtn.textContent = `Показать еще ${fetchApiPictures.inPage} из ${fetchApiPictures.totalPictures}`
     })
     fetchApiPictures.stillHave()
 }
@@ -85,6 +79,5 @@ function loadMoreShowBtn() {
     if (fetchApiPictures.totalPictures > 40) { 
         refs.loadMoreBtn.classList.add('active')
     }
-    refs.loadMoreBtn.textContent = `Показать еще ${fetchApiPictures.parePage} из ${fetchApiPictures.totalPictures}`
-    
+    refs.loadMoreBtn.textContent = `Показать еще ${fetchApiPictures.inPage} из ${fetchApiPictures.totalPictures}`    
 }
