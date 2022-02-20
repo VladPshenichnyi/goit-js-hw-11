@@ -53,6 +53,7 @@ function onSearchPictures(e) {
         clearPicturesGallery();
         createGallery(data.hits);
         lightbox.refresh();
+        refs.inputForm.value = ''
     })
 }
 

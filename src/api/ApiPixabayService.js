@@ -12,19 +12,16 @@ export default class FetchApiPictures {
         this.inPage = 0;
     };
 
-    async fetchPicture() {        
-        const url = `${BASE_URL}${API_KEY}&q=${this.searchPicture}&${OPTIONS_SEARCH}&page=${this.page}`
-        return fetch(url).then(response => {
-            if (!response.ok) {
-                throw new Error(response.status);
-            }
-            return response.json();
-        }).then(data => {
-            this.incrementPage()
-            this.stillHave()
-            return data;               
-        })   
-    }
+    
+
+    fetchPicture = async () => {
+        const url = `${BASE_URL}${API_KEY}&q=${this.searchPicture}&${OPTIONS_SEARCH}&page=${this.page}`;
+        const response = await axios.get(url);
+        const { data } = await response;
+        this.incrementPage()
+        this.stillHave()
+        return data;
+    };
 
     incrementPage() {
         this.page += 1;
