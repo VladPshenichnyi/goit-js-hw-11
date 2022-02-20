@@ -43,6 +43,7 @@ function onSearchPictures(e) {
     fetchApiPictures.fetchPicture().then(data => {
         if (data.total === 0) { 
             refs.inputForm.value = ''
+            refs.loadMoreBtn.classList.remove('active') 
             Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
         }  else {
             Notiflix.Notify.success(`Мы нашли ${data.total} изображений по запросу "${searchPicture}"`);
