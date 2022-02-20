@@ -42,6 +42,7 @@ function onSearchPictures(e) {
     fetchApiPictures.resetPage();
     fetchApiPictures.fetchPicture().then(data => {
         if (data.total === 0) { 
+            refs.inputForm.value = ''
             Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
         }  else {
             Notiflix.Notify.success(`Мы нашли ${data.total} изображений по запросу "${searchPicture}"`);
@@ -53,7 +54,6 @@ function onSearchPictures(e) {
         clearPicturesGallery();
         createGallery(data.hits);
         lightbox.refresh();
-        refs.inputForm.value = ''
     })
 }
 

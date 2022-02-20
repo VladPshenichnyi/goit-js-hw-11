@@ -19,7 +19,6 @@ export default class FetchApiPictures {
         const response = await axios.get(url);
         const { data } = await response;
         this.incrementPage()
-        this.stillHave()
         return data;
     };
 
