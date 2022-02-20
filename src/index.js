@@ -46,10 +46,10 @@ function onSearchPictures(e) {
             refs.loadMoreBtn.classList.remove('active') 
             Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.")
         }  else {
-            Notiflix.Notify.success(`Мы нашли ${data.total} изображений по запросу "${searchPicture}"`);
+            Notiflix.Notify.success(`Мы нашли ${data.totalHits} изображений по запросу "${searchPicture}"`);
         }
         
-        fetchApiPictures.totalPicture(data.total, data.hits.length)
+        fetchApiPictures.totalPicture(data.totalHits , data.hits.length)
         fetchApiPictures.stillHave()
         loadMoreShowBtn()
         clearPicturesGallery();
